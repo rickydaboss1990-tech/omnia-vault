@@ -1,0 +1,25 @@
+.DS_Store
+Thumbs.db
+
+# Obsidian state — the vault works with any Obsidian setup; don't commit yours
+.obsidian/
+
+# Binary/attachment sources stay local (curated screenshots go in assets/)
+Raw/Files/*
+!Raw/Files/.gitkeep
+Drafts/
+
+# Agent chat archive — LOCAL memory only, never committed (raw transcripts
+# contain machine paths + any tokens that flew by in-session). The import
+# script + docs are committed; the dumps are not.
+chats/code/*
+!chats/code/.gitkeep
+chats/codex/*
+!chats/codex/.gitkeep
+
+# Import inventory is machine-local working state
+_relay/IMPORT-INVENTORY.md
+
+# Tracked code repos live in this folder but are NOT vault content.
+# `python scripts/setup_vault.py --gitignore-repos` appends /repo-name/ lines
+# here automatically when you import a project.

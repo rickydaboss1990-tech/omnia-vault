@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#1b2447"/>
+      <stop offset="55%" stop-color="#0f152e"/>
+      <stop offset="100%" stop-color="#0a0e1f"/>
+    </radialGradient>
+    <linearGradient id="wordmark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="50%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#86efac"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="batonGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <path id="relayPath" d="M 165,120 C 340,38 560,30 600,86 C 640,30 860,38 1035,120" fill="none"/>
+    <style>
+      .edge { stroke: #33406b; stroke-width: 1.2; fill: none; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 2.4s ease-out forwards; }
+      .edge.d2 { animation-delay: .35s; } .edge.d3 { animation-delay: .7s; } .edge.d4 { animation-delay: 1.05s; }
+      @keyframes draw { to { stroke-dashoffset: 0; } }
+      .node { animation: pulse 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+      .node.p2 { animation-delay: 1.2s; } .node.p3 { animation-delay: 2.4s; }
+      @keyframes pulse { 0%,100% { transform: scale(1); opacity: .95; } 50% { transform: scale(1.35); opacity: 1; } }
+      .star { animation: twinkle 4.8s ease-in-out infinite; }
+      .star.t2 { animation-delay: 1.6s; } .star.t3 { animation-delay: 3.2s; }
+      @keyframes twinkle { 0%,100% { opacity: .18; } 50% { opacity: .75; } }
+      .fadeup { opacity: 0; animation: fadeup 1.1s ease-out forwards; }
+      .fadeup.f2 { animation-delay: .5s; } .fadeup.f3 { animation-delay: .95s; }
+      @keyframes fadeup { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+  </defs>
+
+  <rect width="1200" height="320" rx="14" fill="url(#glow)"/>
+  <rect x="1" y="1" width="1198" height="318" rx="13" fill="none" stroke="#2a355e" stroke-width="1.5"/>
+
+  <!-- star specks -->
+  <g fill="#8ea2d8">
+    <circle class="star"    cx="90"  cy="48"  r="1.4"/>
+    <circle class="star t2" cx="300" cy="270" r="1.2"/>
+    <circle class="star t3" cx="520" cy="42"  r="1.5"/>
+    <circle class="star"    cx="700" cy="272" r="1.3"/>
+    <circle class="star t2" cx="905" cy="50"  r="1.4"/>
+    <circle class="star t3" cx="1120" cy="250" r="1.2"/>
+    <circle class="star t2" cx="1055" cy="38"  r="1.1"/>
+    <circle class="star"    cx="160" cy="262" r="1.2"/>
+  </g>
+
+  <!-- left constellation: Claude Code -->
+  <g>
+    <path class="edge"    d="M 165,120 L 95,80  M 165,120 L 82,150 M 165,120 L 120,205"/>
+    <path class="edge d2" d="M 95,80 L 82,150   M 120,205 L 82,150 M 165,120 L 232,190"/>
+    <circle class="node"    cx="165" cy="120" r="9"  fill="#7dd3fc" filter="url(#soft)"/>
+    <circle class="node p2" cx="95"  cy="80"  r="4.5" fill="#7dd3fc"/>
+    <circle class="node p3" cx="82"  cy="150" r="5.5" fill="#38bdf8"/>
+    <circle class="node p2" cx="120" cy="205" r="4"  fill="#7dd3fc"/>
+    <circle class="node"    cx="232" cy="190" r="3.5" fill="#38bdf8"/>
+    <text x="165" y="243" text-anchor="middle" fill="#7dd3fc" font-size="15" font-weight="600" letter-spacing="3">CLAUDE CODE</text>
+  </g>
+
+  <!-- right constellation: Codex -->
+  <g>
+    <path class="edge"    d="M 1035,120 L 1105,80 M 1035,120 L 1118,150 M 1035,120 L 1080,205"/>
+    <path class="edge d2" d="M 1105,80 L 1118,150 M 1080,205 L 1118,150 M 1035,120 L 968,190"/>
+    <circle class="node p3" cx="1035" cy="120" r="9"  fill="#86efac" filter="url(#soft)"/>
+    <circle class="node"    cx="1105" cy="80"  r="4.5" fill="#86efac"/>
+    <circle class="node p2" cx="1118" cy="150" r="5.5" fill="#4ade80"/>
+    <circle class="node p3" cx="1080" cy="205" r="4"  fill="#86efac"/>
+    <circle class="node p2" cx="968"  cy="190" r="3.5" fill="#4ade80"/>
+    <text x="1035" y="243" text-anchor="middle" fill="#86efac" font-size="15" font-weight="600" letter-spacing="3">CODEX</text>
+  </g>
+
+  <!-- center knowledge constellation -->
+  <g>
+    <path class="edge d3" d="M 600,86 L 500,60 M 600,86 L 700,60 M 500,60 L 435,95 M 700,60 L 765,95"/>
+    <path class="edge d4" d="M 435,95 L 232,190 M 765,95 L 968,190 M 500,60 L 700,60"/>
+    <circle class="node p2" cx="600" cy="86" r="7"   fill="#c4b5fd" filter="url(#soft)"/>
+    <circle class="node"    cx="500" cy="60" r="4.5" fill="#a78bfa"/>
+    <circle class="node p3" cx="700" cy="60" r="4.5" fill="#a78bfa"/>
+    <circle class="node p2" cx="435" cy="95" r="3.5" fill="#c4b5fd"/>
+    <circle class="node"    cx="765" cy="95" r="3.5" fill="#c4b5fd"/>
+  </g>
+
+  <!-- the relay baton -->
+  <use href="#relayPath" stroke="#3b4a7d" stroke-width="1" stroke-dasharray="3 7" opacity="0.85"/>
+  <circle r="5.5" fill="#fbbf24" filter="url(#batonGlow)">
+    <animateMotion dur="5.6s" repeatCount="indefinite" keyPoints="0;1;1;0;0" keyTimes="0;0.44;0.5;0.94;1" calcMode="linear">
+      <mpath href="#relayPath"/>
+    </animateMotion>
+  </circle>
+
+  <!-- wordmark -->
+  <g text-anchor="middle">
+    <text class="fadeup" x="600" y="188" font-size="64" font-weight="800" letter-spacing="16" fill="url(#wordmark)" filter="url(#soft)">CORTEX</text>
+    <text class="fadeup f2" x="600" y="228" font-size="17" fill="#aab6dd" letter-spacing="1.5">One brain. Two agents. Zero copy-paste.</text>
+    <text class="fadeup f3" x="600" y="262" font-size="12.5" fill="#66759f" letter-spacing="4">OBSIDIAN LLM WIKI &#183; GRAPHIFY CODE GRAPHS &#183; AGENT RELAY &#183; VIDEO INGEST</text>
+  </g>
+</svg>
