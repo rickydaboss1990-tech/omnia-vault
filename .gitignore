@@ -27,3 +27,8 @@ _relay/spar/state.json
 # Tracked code repos live in this folder but are NOT vault content.
 # `python scripts/setup_vault.py --gitignore-repos` appends /repo-name/ lines
 # here automatically when you import a project.
+
+# Python bytecode
+__pycache__/
+*.pyc
+
