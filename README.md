@@ -82,6 +82,50 @@ sequenceDiagram
 
 ---
 
+## Sparring — make the models argue before you build
+
+The relay is the async mode. `/spar` is the sync mode: both models in **one session**,
+where the rival attacks the driver's work — because *whoever made the thing never grades
+the thing*. For auth, schemas, migrations, payments, greenfield architecture — anything
+expensive to get wrong.
+
+```mermaid
+flowchart LR
+    S["SCOUT<br/>recon from the vault:<br/>graph + wiki + baton"] --> L["LOCK<br/>decision map →<br/>plan locked with you"]
+    L --> P["SPAR<br/>Codex attacks, read-only,<br/>bounded rounds"]
+    P --> B["SHIP<br/>one model builds,<br/>the other grades the diff"]
+    B --> K["the argument becomes<br/>Wiki knowledge"]
+    style S fill:#8b5cf6,color:#fff,stroke:none
+    style L fill:#f59e0b,color:#fff,stroke:none
+    style P fill:#0ea5e9,color:#fff,stroke:none
+    style B fill:#10b981,color:#fff,stroke:none
+    style K fill:#64748b,color:#fff,stroke:none
+```
+
+What makes Cortex's version different from a standalone review loop:
+
+- **Recon is nearly free** — the scout phase reads the code graph and wiki catalog
+  instead of sweeping the repo, and every assumption cites its source note.
+- **The loop is resumable state, not chat history** — rounds, verdicts, and the
+  reviewer's thread id live in `_relay/spar/` (`scripts/spar_tool.py`); any later
+  session — either agent — picks up an interrupted spar.
+- **Findings are severity-tagged and arbitrated** — every `[FATAL]`/`[MAJOR]` gets an
+  accept-or-rebut in the log; a round cap turns into an honest deadlock report, never a
+  fake "approved".
+- **Builds are graded both directions** — Codex builds (sandboxed `workspace-write`) and
+  Claude reads the whole diff + runs the proof; Claude builds and a fresh read-only Codex
+  session cross-inspects. You gate the diff either way.
+- **The argument becomes knowledge** — finished spars are archived, captured as a Raw
+  source, and compiled into wiki notes. Next quarter's "why is it built this way?" is a
+  catalog search, not archaeology.
+
+Works in reverse, too — a Codex-driven session can spar with headless Claude as the
+read-only critic. Cross-model mechanics hardened by
+[claudex-loop](https://github.com/chaseai-yt/claudex-loop) (MIT); see
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+
+---
+
 ## The layered memory — answers stay fast, cheap, and cited
 
 Every question routes through the cheapest layer that can answer it:
@@ -162,8 +206,8 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 ├─ _templates/      six note templates (source/topic/concept/entity/project/log)
 ├─ scripts/         deterministic tooling — python stdlib only, no dependencies
 ├─ .claude/
-│  ├─ skills/       18 skills, ready on clone (see below)
-│  └─ commands/     12 slash commands (/setup /import /catchup /save /handoff ...)
+│  ├─ skills/       20 skills, ready on clone (see below)
+│  └─ commands/     13 slash commands (/setup /import /catchup /save /handoff /spar ...)
 ├─ CLAUDE.md        Claude Code wiring        AGENTS.md   Codex + any-agent rules
 └─ VAULT-GUIDE.md   the full operating guide
 ```
@@ -175,7 +219,9 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 | `graphify` | any folder / repo / paper / video → queryable knowledge graph (`query` · `explain` · `path` · `affected`) |
 | `video-ingest` | recordings & video URLs → transcript ⇄ frames, correlated, compiled |
 | `import-project` | adopt an existing codebase + raw files into the vault |
-| `relay` | the Claude ⇄ Codex baton pass |
+| `relay` | the Claude ⇄ Codex baton pass (async) |
+| `sparring` | the Claude ⇄ Codex argument (sync): adversarial plan review + cross-graded builds |
+| `github-pr-api` | GitHub PRs from machines with no `gh` CLI (credential-store token + REST) |
 | `project-context-query` | the 3-layer answer engine |
 | `llm-wiki-ingest / query / lint / maintain` | the LLM Wiki core loops |
 | `taste` | anti-slop frontend design ([Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), MIT) |
@@ -194,6 +240,7 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 |---|---|
 | `/setup` · `/import` | initialize a new project · adopt an existing one |
 | `/catchup` · `/save` · `/handoff` | the daily loop + the agent switch |
+| `/spar` | cross-model adversarial review before high-stakes builds |
 | `/ingest` · `/video` | any source → knowledge · any recording/URL → knowledge |
 | `/wiki` · `/graph` · `/gate` | layered answers · code graphs · the quality gate |
 | `/design-setup` · `/docs-setup` | design stack · document stack |
@@ -209,9 +256,10 @@ The relay simply means you never lose state if you add the second one.
 render as a beautiful navigable graph.
 
 **What are the actual dependencies?** Python 3.9+ and git. That's it — every script is
-standard-library only. `graphify` (code graphs), `crv` + `ffmpeg` (video), and Node
-(web clipping) are optional, checked by `python scripts/setup_vault.py --check`, and each
-unlocks a feature when present.
+standard-library only. `graphify` (code graphs), `crv` + `ffmpeg` (video), Node
+(web clipping), and the Codex CLI (sparring) are optional — each unlocks a feature.
+`python scripts/setup_vault.py --check` shows what's missing and
+`python scripts/setup_vault.py --install` installs what it can for you.
 
 **Is my data safe in here?** The vault ships empty (one self-documenting demo you can
 prune with one command). The audit gate blocks secrets and machine-local paths from ever

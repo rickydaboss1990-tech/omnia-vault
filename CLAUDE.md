@@ -25,6 +25,12 @@ maintenance gate; (4) relay handoff — rewrite `_relay/STATE.md` and stamp with
 **handoff** — when the user is switching to Codex mid-stream: the lighter pass —
 STATE.md rewrite + stamp + gate + commit. (Also: `/handoff`.)
 
+**spar** — when the user says "spar this", "have codex review this", "argue
+this with codex", or is about to build something high-stakes: run the
+`sparring` skill — vault-powered recon, a locked plan, bounded read-only
+Codex review rounds, cross-graded build, and the argument compiled into the
+Wiki afterward. State: `python scripts/spar_tool.py status`. (Also: `/spar`.)
+
 ## 3-Layer Query Rule (any question about the project or its code)
 
 1. **Graph first:** `graphify query "<question>" --graph graphify/<repo>/graph.json`
@@ -48,14 +54,16 @@ Full traversal recipe: `.claude/skills/project-context-query/SKILL.md`.
 | Answer questions | `project-context-query` / `llm-wiki-query` |
 | Validate / fix notes | `llm-wiki-lint` |
 | Commit hygiene + routine upkeep | `llm-wiki-maintain` |
-| Agent handoff (⇄ Codex) | `relay` |
+| Agent handoff (⇄ Codex, async) | `relay` |
+| Cross-model plan/diff review (⇄ Codex, sync) | `sparring` |
 | Code knowledge graphs | `graphify` |
+| GitHub PRs without gh CLI | `github-pr-api` |
 | Obsidian file editing | `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli` |
 | Outward-facing updates/reports | `stakeholder-update-writing` (+ `humanizer`) |
 | Frontend design work | `taste`, `ui-ux-pro-max` (see `/design-setup`) |
 
 Slash commands: `/setup`, `/import`, `/catchup`, `/save`, `/handoff`,
-`/ingest`, `/video`, `/graph`, `/wiki`, `/gate`, `/design-setup`,
+`/spar`, `/ingest`, `/video`, `/graph`, `/wiki`, `/gate`, `/design-setup`,
 `/docs-setup`.
 
 ## Memory automation

@@ -58,3 +58,13 @@ both agents already read the same way. The relay is only the *baton pass*.
 - **Codex** loads `AGENTS.md`, which states the same two moves as hard rules.
 - Both write the same file with the same stamp tool, so neither cares which
   agent came before.
+
+## The two modes
+
+| Mode | What | Where |
+|---|---|---|
+| **Async — the baton** (this file's protocol) | agents alternate across sessions; state travels via STATE.md + git | `_relay/STATE.md`, `_relay/HISTORY.md` |
+| **Sync — sparring** | both models in one session: the driver plans/builds, the rival attacks the plan (read-only rounds) and grades the diff | `_relay/spar/` — `PLAN.md`, `SPAR-LOG.md`, machine-local `state.json`, finished spars in `archive/`; driven by `scripts/spar_tool.py` + the `sparring` skill |
+
+A spar in flight is baton-visible: STATE.md's **Now**/**Watch out** name it,
+and `python scripts/spar_tool.py status` lets any session resume the loop.

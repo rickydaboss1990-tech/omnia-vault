@@ -24,8 +24,13 @@ EXTRAS
         Removes the built-in demo source + demo notes once you have real
         content, then rebuilds the catalog.
     python scripts/setup_vault.py --check
-        Verifies optional tooling (git, graphify, crv, ffmpeg, obsidian) and
-        prints what is missing and how to install it.
+        Verifies optional tooling (git, graphify, crv, ffmpeg, node, codex)
+        and prints what is missing and how to install it.
+    python scripts/setup_vault.py --install
+        Installs the missing optional tooling it can install for you
+        (pip: graphifyy + claude-real-video; npm: defuddle; ffmpeg via
+        winget/brew when available) and prints exact commands for the rest
+        (Codex CLI, Claude Code plugins).
 
 Standard library only. Safe to re-run; existing files are never overwritten.
 """
@@ -217,23 +222,108 @@ def cmd_prune_demo(_):
     return 0
 
 
-def cmd_check(_):
+def find_codex():
+    """The Codex CLI may be on PATH, or bundled by the Codex desktop app."""
+    hit = shutil.which("codex")
+    if hit:
+        return hit
+    local = Path.home() / "AppData" / "Local" / "OpenAI" / "Codex" / "bin"
+    if local.is_dir():
+        exes = sorted(local.glob("*/codex.exe"), key=lambda p: p.stat().st_mtime)
+        if exes:
+            return str(exes[-1])
+    return None
+
+
+def tooling_status():
     def have(cmd_name):
         return shutil.which(cmd_name) is not None
-    checks = [
-        ("git", have("git"), "https://git-scm.com"),
-        ("graphify (code graphs)", have("graphify"), "pip install graphifyy"),
-        ("crv (video ingest)", have("crv"), "pip install claude-real-video"),
-        ("ffmpeg (video ingest)", have("ffmpeg"), "https://ffmpeg.org (or winget install ffmpeg)"),
-        ("node/npx (defuddle web clipping)", have("npx"), "https://nodejs.org"),
+    return [
+        # (label, present, manual hint, auto-install argv or None)
+        ("git", have("git"), "https://git-scm.com", None),
+        ("graphify (code graphs)", have("graphify"), "pip install graphifyy",
+         [sys.executable, "-m", "pip", "install", "graphifyy"]),
+        ("crv (video ingest)", have("crv"), "pip install claude-real-video",
+         [sys.executable, "-m", "pip", "install", "claude-real-video"]),
+        ("ffmpeg (video ingest)", have("ffmpeg"),
+         "winget install Gyan.FFmpeg (Windows) / brew install ffmpeg (macOS) / https://ffmpeg.org",
+         None),  # handled specially in --install
+        ("node/npm (defuddle web clipping)", have("npm"), "https://nodejs.org", None),
+        ("defuddle CLI", have("defuddle"), "npm install -g defuddle",
+         ["npm", "install", "-g", "defuddle"] if have("npm") else None),
+        ("codex CLI (sparring reviewer/builder)", find_codex() is not None,
+         "npm install -g @openai/codex  (then `codex login`) — or the OpenAI Codex "
+         "desktop app, which bundles it", None),
     ]
+
+
+def cmd_check(_):
+    checks = tooling_status()
     print(f"setup: tooling check (python {sys.version.split()[0]})")
     missing = 0
-    for name, ok, hint in checks:
+    for name, ok, hint, _auto in checks:
         print(f"  [{'OK ' if ok else '-- '}] {name}" + ("" if ok else f"   -> {hint}"))
         missing += 0 if ok else 1
-    print("setup: core vault tooling needs ONLY python — everything above is optional "
-          "and unlocks extra ingest/graph features." if missing else "setup: all tooling present.")
+    if missing:
+        print(f"setup: {missing} missing — `python scripts/setup_vault.py --install` "
+              "installs what it can and prints commands for the rest.")
+        print("setup: core vault tooling needs ONLY python — everything above is "
+              "optional and unlocks extra features.")
+    else:
+        print("setup: all tooling present.")
+    print("setup: Claude Code plugin extras install from inside Claude Code: "
+          "/design-setup (impeccable) and /docs-setup (Word/PDF/PowerPoint/Excel).")
+    return 0
+
+
+def runnable(argv):
+    """Resolve argv[0] on PATH; route .cmd/.bat shims through cmd /c (Windows
+    CreateProcess can't launch them directly)."""
+    exe = shutil.which(argv[0])
+    if not exe:
+        return None
+    if exe.lower().endswith((".cmd", ".bat")):
+        return ["cmd", "/c", exe] + list(argv[1:])
+    return [exe] + list(argv[1:])
+
+
+def cmd_install(_):
+    import subprocess
+    checks = tooling_status()
+    manual = []
+    for name, ok, hint, auto in checks:
+        if ok:
+            print(f"  [OK ] {name}")
+            continue
+        if name.startswith("ffmpeg"):
+            argv = None
+            if shutil.which("winget"):
+                argv = ["winget", "install", "--id", "Gyan.FFmpeg", "-e",
+                        "--accept-source-agreements", "--accept-package-agreements"]
+            elif shutil.which("brew"):
+                argv = ["brew", "install", "ffmpeg"]
+            auto = argv
+        auto = runnable(auto) if auto else None
+        if not auto:
+            manual.append((name, hint))
+            print(f"  [-- ] {name}   -> install manually: {hint}")
+            continue
+        print(f"  [.. ] {name}   -> running: {' '.join(auto)}")
+        try:
+            r = subprocess.run(auto, timeout=600)
+            print(f"  [{'OK ' if r.returncode == 0 else '!! '}] {name} "
+                  f"({'installed' if r.returncode == 0 else f'installer exited {r.returncode}'})")
+            if r.returncode != 0:
+                manual.append((name, hint))
+        except Exception as exc:  # noqa: BLE001
+            print(f"  [!! ] {name} install failed ({type(exc).__name__}) -> {hint}")
+            manual.append((name, hint))
+    if manual:
+        print("setup: still needed manually:")
+        for name, hint in manual:
+            print(f"  - {name}: {hint}")
+    print("setup: re-run `--check` to confirm. Claude Code plugin extras: "
+          "/design-setup and /docs-setup from inside Claude Code.")
     return 0
 
 
@@ -245,6 +335,8 @@ def main():
     ap.add_argument("--gitignore-repos", action="store_true", help="gitignore detected repos")
     ap.add_argument("--prune-demo", action="store_true", help="remove the demo content")
     ap.add_argument("--check", action="store_true", help="verify optional tooling")
+    ap.add_argument("--install", action="store_true",
+                    help="install missing optional tooling (pip/npm/winget/brew)")
     args = ap.parse_args()
 
     if args.inventory:
@@ -255,6 +347,8 @@ def main():
         return cmd_prune_demo(args)
     if args.check:
         return cmd_check(args)
+    if args.install:
+        return cmd_install(args)
     if args.name:
         return cmd_new(args)
     ap.print_help()

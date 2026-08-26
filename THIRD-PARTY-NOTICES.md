@@ -24,6 +24,21 @@ its folder. Thank you to every author.
 | `claude-real-video` (the `crv` CLI) | `pip install claude-real-video` | per its project license |
 | `defuddle` CLI | `npm install -g defuddle` | per its project license |
 
+## Inspiration & adapted patterns (no files copied)
+
+- The `sparring` skill's headless-Codex invocation mechanics (stdin feeding,
+  `exec resume` sandbox forcing, thread-id capture, timeout guards) were
+  verified and documented by
+  [chaseai-yt/claudex-loop](https://github.com/chaseai-yt/claudex-loop) (MIT),
+  whose four-phase plan-hardening loop — itself building on interview patterns
+  by [Matt Pocock](https://github.com/mattpocock/skills) and the
+  Codex-as-builder pattern from
+  [steipete/agent-scripts](https://github.com/steipete/agent-scripts) —
+  inspired sparring's review/build discipline. Cortex's implementation
+  (vault-layered recon, relay-resident resumable state via `spar_tool.py`,
+  severity-tagged arbitration, `workspace-write` builds, the knowledge-compile
+  phase, and the reversed Codex-drives-Claude mode) is its own.
+
 ## Local modifications
 
 - `taste`: skill frontmatter `name` changed from `design-taste-frontend` to

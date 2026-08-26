@@ -14,11 +14,20 @@ Five minutes from clone to a working project brain. Two paths — pick yours.
 | `pip install claude-real-video` + [ffmpeg](https://ffmpeg.org) | Optional | video/audio ingest (`crv` CLI) |
 | Node.js | Optional | `defuddle` web clipping, `npx`-installed extras |
 
-Check what you have any time:
+| `npm i -g @openai/codex` + `codex login` | Optional | the sparring loop's rival reviewer/builder (`/spar`) — the Codex desktop app bundles the CLI too |
+
+Check what you have any time — and let the vault install the missing pieces:
 
 ```bash
 python scripts/setup_vault.py --check
 ```
+
+```bash
+python scripts/setup_vault.py --install
+```
+
+(`--install` handles the pip/npm/winget pieces itself and prints exact
+commands for anything it can't do, like `codex login`.)
 
 ## 1. Clone it
 
@@ -78,6 +87,10 @@ ingests the documents and recordings, and wires it all into linked notes.
 folder in Codex and say *"catch up"* — it reads the same baton. No copy-paste,
 ever. (And back again: Codex stamps the baton per AGENTS.md; `/catchup` in
 Claude Code picks it up.)
+
+**Building something high-stakes?** `/spar` first — Codex adversarially
+attacks the locked plan in bounded read-only rounds, then one model builds and
+the other grades the diff, and the whole argument gets compiled into the wiki.
 
 ## 4. Asking questions
 

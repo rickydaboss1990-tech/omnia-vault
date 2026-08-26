@@ -41,3 +41,12 @@ and the chat archive. Full protocol: `_relay/PROTOCOL.md`.
   knowledge → the Wiki.
 - Never hand off a lie: red tests and failing gates go in **Watch out**.
 - A handoff without a commit is half a handoff.
+
+## Sync mode
+
+The baton is the relay's **async** mode (agents alternate across sessions).
+For the **synchronous** mode — both models in ONE session, the rival attacking
+the driver's plan and diff in bounded rounds — use the `sparring` skill
+(`/spar`). Its state lives beside the baton in `_relay/spar/`; an active or
+interrupted spar is part of the handoff (mention it in **Now** / **Watch
+out**, and `python scripts/spar_tool.py status` shows where it stands).

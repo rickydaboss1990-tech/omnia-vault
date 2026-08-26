@@ -33,7 +33,8 @@ macOS/Linux. Every script is deterministic and standard-library only.
 | `python scripts/setup_vault.py --inventory` | Scan the vault root for repos / media / documents → `_relay/IMPORT-INVENTORY.md` (existing-project import). |
 | `python scripts/setup_vault.py --gitignore-repos` | Append detected repo folders to `.gitignore`. |
 | `python scripts/setup_vault.py --prune-demo` | Remove the built-in demo content and rebuild. |
-| `python scripts/setup_vault.py --check` | Verify optional tooling (git, graphify, crv, ffmpeg, node) with install hints. |
+| `python scripts/setup_vault.py --check` | Verify optional tooling (git, graphify, crv, ffmpeg, node, defuddle, codex) with install hints. |
+| `python scripts/setup_vault.py --install` | Install what it can (pip: graphifyy, claude-real-video; npm: defuddle; ffmpeg via winget/brew) and print exact commands for the rest. |
 
 ## relay_tool.py (agent handoff)
 
@@ -41,6 +42,20 @@ macOS/Linux. Every script is deterministic and standard-library only.
 |---------|---------|
 | `python scripts/relay_tool.py status` | Show baton stamp + git HEAD; warns when commits landed after the last handoff (stale baton). |
 | `python scripts/relay_tool.py stamp --agent <claude\|codex> --summary "..."` | Stamp `_relay/STATE.md` and prepend the entry to `_relay/HISTORY.md`. Run after rewriting STATE.md's sections. |
+
+## spar_tool.py (cross-model sparring loop)
+
+| Command | Purpose |
+|---------|---------|
+| `python scripts/spar_tool.py start --task "..." [--rounds 5] [--reviewer codex] [--driver claude] [--archive-active]` | Begin a spar: creates `_relay/spar/{PLAN.md,SPAR-LOG.md,state.json}`. Refuses if one is active unless `--archive-active`. |
+| `python scripts/spar_tool.py set-thread --id <id>` | Record the reviewer's session/thread id so any later session can resume the loop. |
+| `python scripts/spar_tool.py record-round --critique-file <path>` | Append the critique to SPAR-LOG.md, parse its `VERDICT:` line, bump the round, print `round=N verdict=...` (+ cap/no-verdict flags). Refuses empty critiques. |
+| `python scripts/spar_tool.py respond --text "..." \| --file <path>` | Log the driver's arbiter response (what was accepted, what was rebutted, why). |
+| `python scripts/spar_tool.py status` | Loop state: phase, round, verdict, thread, files, cap warnings. |
+| `python scripts/spar_tool.py finish --outcome approved\|deadlock\|abandoned [--summary "..."]` | Close the spar and archive PLAN + LOG to `_relay/spar/archive/<date>-<slug>/`. |
+
+Reviewer invocation mechanics (stdin feeding, resume sandbox forcing, thread
+ids, timeouts) live in `.claude/skills/sparring/SKILL.md`.
 
 ## Memory automation
 

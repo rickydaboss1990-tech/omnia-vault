@@ -20,6 +20,10 @@ chats/codex/*
 # Import inventory is machine-local working state
 _relay/IMPORT-INVENTORY.md
 
+# Sparring loop: the plan + log + archive are committed knowledge; the state
+# file holds a machine-local reviewer thread id and stays out
+_relay/spar/state.json
+
 # Tracked code repos live in this folder but are NOT vault content.
 # `python scripts/setup_vault.py --gitignore-repos` appends /repo-name/ lines
 # here automatically when you import a project.

@@ -158,6 +158,7 @@ All stdlib-only, all run from the vault root. Full table:
 | `audit_public.py` | fails on secrets, machine-local absolute paths, tracked Obsidian plugin state |
 | `setup_vault.py` | `--name` seed a new project · `--inventory` scan for importable content · `--gitignore-repos` · `--prune-demo` · `--check` tooling |
 | `relay_tool.py` | `status` baton + staleness check · `stamp` handoff stamp + history |
+| `spar_tool.py` | cross-model sparring state: `start` · `set-thread` · `record-round` (verdict parse) · `respond` · `status` · `finish` (archive) |
 | `import_chats.py` | archive Claude Code **and** Codex transcripts → `chats/` (gitignored, redacted) |
 | `sync_graphs.py` | AST-rebuild + copy fresh `graph.json` snapshots into `graphify/<repo>/` |
 | `install_hooks.sh` | activate the pre-commit gate (`sh scripts/install_hooks.sh`) |
@@ -169,7 +170,9 @@ All stdlib-only, all run from the vault root. Full table:
 **Workflow skills** (`.claude/skills/` — plain Markdown, readable by any
 agent): `llm-wiki-ingest`, `llm-wiki-query`, `llm-wiki-lint`,
 `llm-wiki-maintain`, `project-context-query`, `video-ingest`,
-`import-project`, `relay`, `stakeholder-update-writing`.
+`import-project`, `relay` (async handoff), `sparring` (sync cross-model
+review — needs the Codex CLI), `github-pr-api`,
+`stakeholder-update-writing`.
 
 **Obsidian editing skills** (from
 [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills), MIT):

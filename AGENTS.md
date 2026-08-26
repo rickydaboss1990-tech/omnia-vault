@@ -89,7 +89,13 @@ Every agent working in this folder follows these rules. The narrative guide is
 - Answer questions: `.claude/skills/project-context-query/SKILL.md`
 - Validate/fix notes: `.claude/skills/llm-wiki-lint/SKILL.md`
 - Maintain/commit: `.claude/skills/llm-wiki-maintain/SKILL.md`
-- Agent handoff: `.claude/skills/relay/SKILL.md`
+- Agent handoff (async baton): `.claude/skills/relay/SKILL.md`
+- Cross-model plan/diff review (sync — before high-stakes builds):
+  `.claude/skills/sparring/SKILL.md`. Works with Codex as the driver too:
+  start with `--driver codex --reviewer claude` and use headless Claude
+  (`claude -p ... --permission-mode plan --output-format json`) as the
+  read-only critic; same `scripts/spar_tool.py` state, same rules.
+- GitHub PRs without gh CLI: `.claude/skills/github-pr-api/SKILL.md`
 - Obsidian editing: `.claude/skills/obsidian-markdown/SKILL.md` (+ bases,
   canvas, cli, defuddle)
 - Outward updates/reports: `.claude/skills/stakeholder-update-writing/SKILL.md`
