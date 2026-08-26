@@ -164,6 +164,26 @@ with curated screenshots. Your standups become queryable knowledge.
 
 ---
 
+## The war-room — a plan that watches videos back
+
+Plans die the week after kickoff. Cortex keeps a **living plan** (`Plan/` — roadmap,
+phases with exit criteria, a tool-adoption ledger) and runs every new input *against* it:
+
+```
+/roadmap My Product          ← build the plan: vision → phases → exit criteria
+/intel https://youtube.com/...   ← "should we use anything from this?"
+```
+
+`/intel` loads the **plan digest first**, then watches the video, then ranks every
+technique and tool in it — phase fit, impact, effort, confidence → **ADOPT / TRIAL /
+WATCH / SKIP** — and delivers one honest verdict: `INCORPORATE`, `WATCHLIST`, or `PASS`
+("nothing here beats the plan" is a win, not a failure). You gate what gets in. Adopted
+items land in the phase files **with provenance back to the brief**; tools get verified
+official sources, per-tool confirmed installs, and a `candidate → trialing → adopted`
+ledger in `TOOLBOX.md`. Six months later, "why did we do it this way?" has a paper trail.
+
+---
+
 ## 60-second start
 
 ```bash
@@ -201,13 +221,14 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 ├─ Wiki/            compiled knowledge — topics · concepts · entities · projects · logs
 ├─ Raw/Sources/     captured material, verbatim, source-of-truth for every claim
 ├─ graphify/        committed code-graph snapshots per tracked repo
-├─ _relay/          the baton (STATE.md) + handoff history + protocol
+├─ Plan/            the war-room (via /roadmap): phased roadmap · intel briefs · toolbox
+├─ _relay/          the baton (STATE.md) + handoff history + sparring loop state
 ├─ Schema/          frontmatter contracts · naming · lint rules · command reference
 ├─ _templates/      six note templates (source/topic/concept/entity/project/log)
 ├─ scripts/         deterministic tooling — python stdlib only, no dependencies
 ├─ .claude/
-│  ├─ skills/       20 skills, ready on clone (see below)
-│  └─ commands/     13 slash commands (/setup /import /catchup /save /handoff /spar ...)
+│  ├─ skills/       21 skills, ready on clone (see below)
+│  └─ commands/     15 slash commands (/setup /import /catchup /save /spar /intel ...)
 ├─ CLAUDE.md        Claude Code wiring        AGENTS.md   Codex + any-agent rules
 └─ VAULT-GUIDE.md   the full operating guide
 ```
@@ -221,6 +242,7 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 | `import-project` | adopt an existing codebase + raw files into the vault |
 | `relay` | the Claude ⇄ Codex baton pass (async) |
 | `sparring` | the Claude ⇄ Codex argument (sync): adversarial plan review + cross-graded builds |
+| `war-room` | the living plan (`Plan/`): phased roadmap + plan-aware video triage + tool adoption ledger |
 | `github-pr-api` | GitHub PRs from machines with no `gh` CLI (credential-store token + REST) |
 | `project-context-query` | the 3-layer answer engine |
 | `llm-wiki-ingest / query / lint / maintain` | the LLM Wiki core loops |
@@ -241,6 +263,7 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 | `/setup` · `/import` | initialize a new project · adopt an existing one |
 | `/catchup` · `/save` · `/handoff` | the daily loop + the agent switch |
 | `/spar` | cross-model adversarial review before high-stakes builds |
+| `/roadmap` · `/intel` | the living plan · triage a video/meeting against it |
 | `/ingest` · `/video` | any source → knowledge · any recording/URL → knowledge |
 | `/wiki` · `/graph` · `/gate` | layered answers · code graphs · the quality gate |
 | `/design-setup` · `/docs-setup` | design stack · document stack |

@@ -71,7 +71,8 @@ Three memories, one system:
 │  ├─ catalog.jsonl          # generated machine-readable catalog (SEARCH THIS)
 │  └─ log.md                 # generated change log (via `wiki_tool.py log`)
 ├─ graphify/                 # committed Graphify snapshots per tracked repo
-├─ _relay/                   # the agent-to-agent baton: STATE.md, HISTORY.md, PROTOCOL.md
+├─ Plan/                     # the war-room (created by /roadmap): ROADMAP.md, phases/, intel/, TOOLBOX.md
+├─ _relay/                   # the agent-to-agent baton: STATE.md, HISTORY.md, PROTOCOL.md (+ spar/ loop state)
 ├─ Schema/                   # contracts: frontmatter, naming, lint, commands, examples
 ├─ _templates/               # source/concept/topic/entity/project/log templates
 ├─ scripts/                  # deterministic tooling (python stdlib only) — see §6
@@ -159,6 +160,7 @@ All stdlib-only, all run from the vault root. Full table:
 | `setup_vault.py` | `--name` seed a new project · `--inventory` scan for importable content · `--gitignore-repos` · `--prune-demo` · `--check` tooling |
 | `relay_tool.py` | `status` baton + staleness check · `stamp` handoff stamp + history |
 | `spar_tool.py` | cross-model sparring state: `start` · `set-thread` · `record-round` (verdict parse) · `respond` · `status` · `finish` (archive) |
+| `plan_tool.py` | war-room plan: `init` scaffold · `context` digest (run before intel triage) · `new-intel` brief · `status` |
 | `import_chats.py` | archive Claude Code **and** Codex transcripts → `chats/` (gitignored, redacted) |
 | `sync_graphs.py` | AST-rebuild + copy fresh `graph.json` snapshots into `graphify/<repo>/` |
 | `install_hooks.sh` | activate the pre-commit gate (`sh scripts/install_hooks.sh`) |
@@ -171,8 +173,8 @@ All stdlib-only, all run from the vault root. Full table:
 agent): `llm-wiki-ingest`, `llm-wiki-query`, `llm-wiki-lint`,
 `llm-wiki-maintain`, `project-context-query`, `video-ingest`,
 `import-project`, `relay` (async handoff), `sparring` (sync cross-model
-review — needs the Codex CLI), `github-pr-api`,
-`stakeholder-update-writing`.
+review — needs the Codex CLI), `war-room` (the living plan + plan-aware
+intel triage), `github-pr-api`, `stakeholder-update-writing`.
 
 **Obsidian editing skills** (from
 [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills), MIT):

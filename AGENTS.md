@@ -86,6 +86,10 @@ Every agent working in this folder follows these rules. The narrative guide is
 - Ingest a source: `.claude/skills/llm-wiki-ingest/SKILL.md`
 - Ingest a recording or video URL: `.claude/skills/video-ingest/SKILL.md`
 - Adopt an existing project: `.claude/skills/import-project/SKILL.md`
+- The living plan + plan-aware intel triage ("is this video worth using?"):
+  `.claude/skills/war-room/SKILL.md` — plan digest
+  (`python scripts/plan_tool.py context`) BEFORE watching; the user gates
+  every incorporation and every tool install.
 - Answer questions: `.claude/skills/project-context-query/SKILL.md`
 - Validate/fix notes: `.claude/skills/llm-wiki-lint/SKILL.md`
 - Maintain/commit: `.claude/skills/llm-wiki-maintain/SKILL.md`

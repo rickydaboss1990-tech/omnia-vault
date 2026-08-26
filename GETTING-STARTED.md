@@ -92,6 +92,12 @@ Claude Code picks it up.)
 attacks the locked plan in bounded read-only rounds, then one model builds and
 the other grades the diff, and the whole argument gets compiled into the wiki.
 
+**Planning a whole project?** `/roadmap` builds the living plan (phases, exit
+criteria, toolbox), and from then on `/intel <any YouTube link or recording>`
+answers the only question that matters about new content: *does this change
+our plan?* — ranked items, an honest INCORPORATE/WATCHLIST/PASS verdict, and
+user-gated adoption + tool installs.
+
 ## 4. Asking questions
 
 ```

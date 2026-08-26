@@ -57,6 +57,18 @@ macOS/Linux. Every script is deterministic and standard-library only.
 Reviewer invocation mechanics (stdin feeding, resume sandbox forcing, thread
 ids, timeouts) live in `.claude/skills/sparring/SKILL.md`.
 
+## plan_tool.py (war-room — the living plan)
+
+| Command | Purpose |
+|---------|---------|
+| `python scripts/plan_tool.py init --name "..." [--vision "..."] [--phases "A,B,C"]` | Scaffold `Plan/` — ROADMAP.md, one file per phase, intel/, TOOLBOX.md. Refuses if already initialized. |
+| `python scripts/plan_tool.py context` | Compact plan digest (vision, phase statuses, active phase's open deliverables, toolbox, recent intel verdicts). **Run before triaging any new video/meeting.** |
+| `python scripts/plan_tool.py new-intel --title "..." --source "<url-or-path>"` | Scaffold a dated intel brief in `Plan/intel/` with the ranking table + `INTEL VERDICT` contract. |
+| `python scripts/plan_tool.py status` | Plan health: phases done/active, deliverables checked, briefs missing verdicts, stale `trialing` tools. |
+
+The triage judgment (ranking rubric, incorporation gates, tool-install rules)
+lives in `.claude/skills/war-room/SKILL.md`.
+
 ## Memory automation
 
 | Command | Mutates | Purpose |

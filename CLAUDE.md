@@ -31,6 +31,13 @@ this with codex", or is about to build something high-stakes: run the
 Codex review rounds, cross-graded build, and the argument compiled into the
 Wiki afterward. State: `python scripts/spar_tool.py status`. (Also: `/spar`.)
 
+**intel** — when the user drops a video/article asking "should we use this?",
+"does this change our plan?": run the `war-room` skill's triage — plan digest
+first (`python scripts/plan_tool.py context`), then watch, rank each item
+against the phases, and let the user gate what gets incorporated or
+installed. Never answer from the video alone. (Also: `/intel`; plan building
+and upkeep: `/roadmap`.)
+
 ## 3-Layer Query Rule (any question about the project or its code)
 
 1. **Graph first:** `graphify query "<question>" --graph graphify/<repo>/graph.json`
@@ -50,6 +57,7 @@ Full traversal recipe: `.claude/skills/project-context-query/SKILL.md`.
 |---|---|
 | Ingest any source (doc, URL, text, diagram) | `llm-wiki-ingest` (+ `defuddle` for web pages) |
 | Watch/ingest a recording or YouTube/TikTok URL | `video-ingest` |
+| Build/maintain the living plan; triage videos AGAINST it | `war-room` (`/roadmap`, `/intel`) |
 | Adopt an existing project (repos, media, docs) | `import-project` |
 | Answer questions | `project-context-query` / `llm-wiki-query` |
 | Validate / fix notes | `llm-wiki-lint` |
@@ -63,8 +71,8 @@ Full traversal recipe: `.claude/skills/project-context-query/SKILL.md`.
 | Frontend design work | `taste`, `ui-ux-pro-max` (see `/design-setup`) |
 
 Slash commands: `/setup`, `/import`, `/catchup`, `/save`, `/handoff`,
-`/spar`, `/ingest`, `/video`, `/graph`, `/wiki`, `/gate`, `/design-setup`,
-`/docs-setup`.
+`/spar`, `/roadmap`, `/intel`, `/ingest`, `/video`, `/graph`, `/wiki`,
+`/gate`, `/design-setup`, `/docs-setup`.
 
 ## Memory automation
 
