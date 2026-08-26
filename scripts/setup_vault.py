@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""setup_vault.py — bootstrap this Cortex vault for a real project.
+"""setup_vault.py — bootstrap this Omnia Vault for a real project.
 
 Two modes, both non-interactive (agents drive this; flags carry the answers):
 
@@ -52,12 +52,12 @@ SYSTEM_DIRS = {"Raw", "Wiki", "Schema", "_templates", "_relay", "scripts", "asse
                "chats", "graphify", "tutorial", "node_modules"}
 
 DEMO_FILES = [
-    "Raw/Sources/cortex-system-demo.md",
-    "Wiki/Topics/cortex.md",
+    "Raw/Sources/omnia-vault-system-demo.md",
+    "Wiki/Topics/omnia-vault.md",
     "Wiki/Concepts/raw-vs-compiled-knowledge.md",
     "Wiki/Concepts/the-relay.md",
     "Wiki/Concepts/three-layer-query-rule.md",
-    "Wiki/Logs/cortex-demo-ingest.md",
+    "Wiki/Logs/omnia-vault-demo-ingest.md",
 ]
 
 
@@ -149,7 +149,7 @@ def cmd_inventory(_):
                     if f.is_file():
                         if f.suffix.lower() in MEDIA_EXT:
                             media.append(f.relative_to(VAULT))
-                        elif f.suffix.lower() in DOC_EXT:
+                        elif f.suffix.lower() in DOC_EXT or f.suffix.lower() == ".md":
                             docs.append(f.relative_to(VAULT))
         elif child.is_file():
             if child.suffix.lower() in MEDIA_EXT:
@@ -328,7 +328,7 @@ def cmd_install(_):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Bootstrap this Cortex vault")
+    ap = argparse.ArgumentParser(description="Bootstrap this Omnia Vault")
     ap.add_argument("--name", help="project name (new-project mode)")
     ap.add_argument("--topic", help="main topic/domain (defaults to --name)")
     ap.add_argument("--inventory", action="store_true", help="scan for importable content")

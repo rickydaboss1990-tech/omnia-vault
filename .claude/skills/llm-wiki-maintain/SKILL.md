@@ -36,7 +36,8 @@ All commands must pass before committing.
 - **Logging:** record meaningful changes with
   `python scripts/wiki_tool.py log --title "..." --details "..."`.
 - **Hooks:** `scripts/install_hooks.sh` points git at `.githooks/` so the
-  pre-commit hook runs build + lint + source-lint automatically.
+  pre-commit hook runs the full gate (doctor, build, lint, source-lint,
+  audit_public) automatically.
 
 ## Rules
 

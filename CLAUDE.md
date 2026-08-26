@@ -1,6 +1,6 @@
-# CLAUDE.md — Cortex Vault
+# CLAUDE.md — Omnia Vault
 
-This folder is a **Cortex vault**: an Obsidian LLM Wiki + code knowledge graphs
+This folder is an **Omnia Vault**: an Obsidian LLM Wiki + code knowledge graphs
 + a two-agent relay. It is the project's memory — everything you need is inside
 it. Read [AGENTS.md](AGENTS.md) (hard rules) and [VAULT-GUIDE.md](VAULT-GUIDE.md)
 (full operating guide) before working here.

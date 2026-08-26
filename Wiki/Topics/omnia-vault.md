@@ -6,13 +6,13 @@ status: growing
 created: 2026-08-26
 updated: 2026-08-26
 sources:
-  - "Raw/Sources/cortex-system-demo.md"
+  - "Raw/Sources/omnia-vault-system-demo.md"
 source_count: 1
 aliases:
   - "the vault system"
 ---
 
-# Cortex
+# Omnia Vault
 
 The operating system this vault runs on: an Obsidian LLM Wiki + Graphify code
 graphs + a Claude Code ⇄ Codex relay. This topic hub groups the concepts that

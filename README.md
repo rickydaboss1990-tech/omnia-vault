@@ -1,14 +1,15 @@
 <div align="center">
 
-<img src=".github/assets/cortex-banner.svg" alt="Cortex — one brain, two agents, zero copy-paste" width="100%"/>
+<img src=".github/assets/omnia-vault-banner.svg" alt="Omnia Vault — everything your project knows, everything it can do" width="100%"/>
 
 <br/><br/>
 
-**Clone a brain, not a boilerplate.**
+**Omnia** — Latin for *all things*. **Vault** — where your project keeps them.
 
-Cortex is a plug-and-play project OS: an Obsidian **LLM Wiki**, **Graphify code graphs**,
-a **video-watching pipeline**, and a **relay** that lets **Claude Code and Codex work the
-same project — alternating freely, with zero copy-paste.**
+Omnia Vault is an all-in-one project brain you clone: an Obsidian **LLM wiki**, **code
+knowledge graphs**, a **living plan that triages every new video and meeting against
+itself**, a **20+ skill toolkit**, and a **relay** that lets Claude Code and Codex work
+the same project with zero copy-paste. Memory, planning, tools, agents — one repo.
 
 <br/>
 
@@ -16,7 +17,8 @@ same project — alternating freely, with zero copy-paste.**
 [![Claude Code](https://img.shields.io/badge/Claude_Code-ready-7dd3fc?style=flat-square)](CLAUDE.md)
 [![Codex](https://img.shields.io/badge/Codex-ready-86efac?style=flat-square)](AGENTS.md)
 [![Obsidian](https://img.shields.io/badge/Obsidian-vault-a78bfa?style=flat-square)](https://obsidian.md)
-[![Tooling](https://img.shields.io/badge/python-stdlib_only-fbbf24?style=flat-square)](scripts/)
+[![Planning](https://img.shields.io/badge/war--room-video_intel-fbbf24?style=flat-square)](.claude/skills/war-room/SKILL.md)
+[![Tooling](https://img.shields.io/badge/python-stdlib_only-f9a8d4?style=flat-square)](scripts/)
 
 <br/>
 
@@ -31,98 +33,64 @@ same project — alternating freely, with zero copy-paste.**
 
 ## Why this exists
 
-AI coding agents are brilliant and amnesiac. Every session starts from zero: you re-explain
-the project, re-paste the context, re-open the same twenty files. Switch from Claude Code to
-Codex and it's worse — two brilliant agents, two separate amnesias, and you're the
-copy-paste middleware between them.
+Three things quietly kill AI-assisted projects:
 
-Cortex fixes the memory problem at the repository level. **The repo *is* the brain.**
-Everything an agent needs to be instantly useful — knowledge, code understanding, session
-state — lives in files, is validated by deterministic tooling, and travels with `git`.
+1. **Agents are amnesiac.** Every session starts from zero — you re-explain the project,
+   re-paste the context, re-open the same twenty files. Use both Claude Code *and* Codex
+   and it's worse: two brilliant tools, two separate amnesias, and you're the copy-paste
+   middleware between them.
+2. **Plans die the week after kickoff.** New information keeps arriving — a meeting, a
+   YouTube technique, a shiny tool — and it either gets ignored or bolted on with no
+   judgment, until the "plan" describes a project that no longer exists.
+3. **Knowledge evaporates.** The decision from that call three weeks ago? The reason you
+   rejected that framework? Gone with the chat scrollback.
 
-| Memory | What it holds | Where it lives |
+Omnia Vault fixes all three at the repository level. **The repo *is* the operation** —
+everything an agent needs to be instantly useful lives in files, validated by
+deterministic tooling, traveling with `git`:
+
+| Layer | What it holds | Where it lives |
 |---|---|---|
-| 🧠 **Knowledge** | every meeting, doc, video, and decision — compiled into short, linked, *source-traceable* notes | `Wiki/` + `Raw/Sources/` |
+| 🧠 **Memory** | every meeting, doc, video, and decision — compiled into short, linked, *source-traceable* notes | `Wiki/` + `Raw/Sources/` |
 | 🕸️ **Code understanding** | a queryable knowledge graph per repo (communities, god nodes, impact analysis) | `graphify/` |
+| 🗺️ **The plan** | a phased roadmap with exit criteria, intel briefs, and a tool-adoption ledger | `Plan/` |
 | 🏃 **Session state** | the baton: what just landed, what's next, what to watch out for | `_relay/STATE.md` |
 
 Open the folder in **Obsidian** and the whole brain becomes a navigable constellation —
-notes, code nodes, and sources, all one graph.
+notes, code nodes, plans, and sources, all one graph.
 
 ---
 
-## The relay — use both agents like one agent
+## The war-room — feed it videos, and the plan evolves
 
-Claude Code plans beautifully. Codex grinds through execution and debugging. Cortex lets
-you use each for what it's best at, **on the same project, alternately, without
-re-explaining anything**:
+`/roadmap` builds the plan the right way: vision → measurable success criteria → phases
+with **exit criteria** — locked with you, not guessed. Then the part most systems don't
+have: **the plan metabolizes new information.**
 
-```mermaid
-sequenceDiagram
-    participant C as Claude Code
-    participant R as _relay/STATE.md (the baton)
-    participant X as Codex
-    C->>R: /handoff — rewrite baton, stamp, commit
-    Note over R: Now · Just landed · Next<br/>Open questions · Watch out
-    X->>R: "catch up" — reads baton + git log
-    X->>X: implements, tests, debugs
-    X->>R: rewrite baton, stamp (--agent codex), commit
-    C->>R: /catchup — picks up exactly where Codex stopped
+```
+/intel https://youtube.com/watch?v=...     ← "here's a new technique — worth anything to us?"
+/intel standup-recording.mkv               ← meetings feed the same loop
 ```
 
-- Both agents read the same rules (`CLAUDE.md` for Claude, `AGENTS.md` for Codex) and
-  write the same baton.
-- `python scripts/relay_tool.py status` detects a **stale baton** (commits after the last
-  handoff) so nobody trusts old state.
-- Both agents' chat transcripts are archived locally (`python scripts/import_chats.py`)
-  — searchable memory, secrets redacted, never committed.
+Every `/intel` runs the same discipline:
 
-> No copy-paste. No "let me summarize the conversation so far." Open the other tool and say
-> *"catch up."*
+1. **Plan digest first, video second** — the triage loads the roadmap, the active phase's
+   open deliverables, and the adopted toolbox *before* watching a single frame. The
+   answer is about *your project*, never just a video summary.
+2. **Watch it properly** — scene-aware keyframes + Whisper transcript, correlated
+   frame-by-frame; the full capture lands in `Raw/Sources/` for permanent citation.
+3. **Rank every item against the plan** — phase fit / impact / effort / confidence →
+   **ADOPT · TRIAL · WATCH · SKIP**, ending in one honest verdict:
+   `INCORPORATE`, `WATCHLIST`, or `PASS`. ("Nothing here beats the plan" is a win — and
+   the logged brief stops the same video from being re-litigated next month.)
+4. **You gate what gets in.** Adopted items land in the phase files **with provenance
+   back to the brief**; phases rebalance only when argued and approved.
+5. **Tools get adopted like adults** — official source verified (video links are treated
+   as untrusted), per-tool confirmed installs, `candidate → trialing → adopted` tracked
+   in `TOOLBOX.md` with the *why* kept even for rejections.
 
----
-
-## Sparring — make the models argue before you build
-
-The relay is the async mode. `/spar` is the sync mode: both models in **one session**,
-where the rival attacks the driver's work — because *whoever made the thing never grades
-the thing*. For auth, schemas, migrations, payments, greenfield architecture — anything
-expensive to get wrong.
-
-```mermaid
-flowchart LR
-    S["SCOUT<br/>recon from the vault:<br/>graph + wiki + baton"] --> L["LOCK<br/>decision map →<br/>plan locked with you"]
-    L --> P["SPAR<br/>Codex attacks, read-only,<br/>bounded rounds"]
-    P --> B["SHIP<br/>one model builds,<br/>the other grades the diff"]
-    B --> K["the argument becomes<br/>Wiki knowledge"]
-    style S fill:#8b5cf6,color:#fff,stroke:none
-    style L fill:#f59e0b,color:#fff,stroke:none
-    style P fill:#0ea5e9,color:#fff,stroke:none
-    style B fill:#10b981,color:#fff,stroke:none
-    style K fill:#64748b,color:#fff,stroke:none
-```
-
-What makes Cortex's version different from a standalone review loop:
-
-- **Recon is nearly free** — the scout phase reads the code graph and wiki catalog
-  instead of sweeping the repo, and every assumption cites its source note.
-- **The loop is resumable state, not chat history** — rounds, verdicts, and the
-  reviewer's thread id live in `_relay/spar/` (`scripts/spar_tool.py`); any later
-  session — either agent — picks up an interrupted spar.
-- **Findings are severity-tagged and arbitrated** — every `[FATAL]`/`[MAJOR]` gets an
-  accept-or-rebut in the log; a round cap turns into an honest deadlock report, never a
-  fake "approved".
-- **Builds are graded both directions** — Codex builds (sandboxed `workspace-write`) and
-  Claude reads the whole diff + runs the proof; Claude builds and a fresh read-only Codex
-  session cross-inspects. You gate the diff either way.
-- **The argument becomes knowledge** — finished spars are archived, captured as a Raw
-  source, and compiled into wiki notes. Next quarter's "why is it built this way?" is a
-  catalog search, not archaeology.
-
-Works in reverse, too — a Codex-driven session can spar with headless Claude as the
-read-only critic. Cross-model mechanics hardened by
-[claudex-loop](https://github.com/chaseai-yt/claudex-loop) (MIT); see
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+Six months later, "why is the project shaped like this?" has a paper trail: brief →
+phase edit → commit.
 
 ---
 
@@ -140,54 +108,58 @@ flowchart LR
     style R fill:#f59e0b,color:#fff,stroke:none
 ```
 
-No repo sweeps. No transcript re-reads. Claims trace back to sources, and a linter
-enforces it: every compiled note must name the raw files that support it
-(`sources` / `source_count`), tags must match folders, and a **maintenance gate**
-(`doctor → build → lint → source-lint → audit`) blocks bad commits — including secrets
-and machine-local paths.
+No repo sweeps. No transcript re-reads. Claims trace back to sources, and the linter
+keeps it honest: source links must point at real files with accurate counts, tags must
+match folders, and sourceless notes get flagged. The **maintenance gate**
+(`doctor → build → lint → source-lint → audit`) runs before every commit — the audit
+is a best-effort text scan of the working tree for secrets and machine-local paths,
+and one command (`sh scripts/install_hooks.sh`) wires the full gate into a pre-commit
+hook. Recordings and
+reference videos enter through the same door: `/video <file-or-URL>` turns anything
+crv can watch (local files, YouTube, TikTok, Instagram) into transcript ⇄ keyframe
+knowledge with curated screenshots.
 
 ---
 
-## It watches videos, too
+## Two agents, one project — the relay and the sparring ring
 
-Point it at a meeting recording, a screen capture, **or a YouTube/TikTok URL**:
+Claude Code plans beautifully. Codex grinds through execution. Omnia Vault lets you use
+each for what it's best at — **asynchronously** (the relay) and **synchronously**
+(sparring).
 
-```
-/video standup-2026-03-14.mkv
-/video https://youtube.com/watch?v=...   ← reference videos for design/research
-```
+**The relay** — switch agents anytime, with zero copy-paste:
 
-Under the hood: [`crv`](https://pypi.org/project/claude-real-video/) extracts scene-aware
-deduplicated keyframes + a Whisper transcript, the agent **correlates what's shown with
-what's said** frame-by-frame, redacts secrets, and compiles the result into linked notes
-with curated screenshots. Your standups become queryable knowledge.
-
----
-
-## The war-room — a plan that watches videos back
-
-Plans die the week after kickoff. Cortex keeps a **living plan** (`Plan/` — roadmap,
-phases with exit criteria, a tool-adoption ledger) and runs every new input *against* it:
-
-```
-/roadmap My Product          ← build the plan: vision → phases → exit criteria
-/intel https://youtube.com/...   ← "should we use anything from this?"
+```mermaid
+sequenceDiagram
+    participant C as Claude Code
+    participant R as _relay/STATE.md (the baton)
+    participant X as Codex
+    C->>R: /handoff — rewrite baton, stamp, commit
+    Note over R: Now · Just landed · Next<br/>Open questions · Watch out
+    X->>R: "catch up" — reads baton + git log
+    X->>X: implements, tests, debugs
+    X->>R: rewrite baton, stamp (--agent codex), commit
+    C->>R: /catchup — picks up exactly where Codex stopped
 ```
 
-`/intel` loads the **plan digest first**, then watches the video, then ranks every
-technique and tool in it — phase fit, impact, effort, confidence → **ADOPT / TRIAL /
-WATCH / SKIP** — and delivers one honest verdict: `INCORPORATE`, `WATCHLIST`, or `PASS`
-("nothing here beats the plan" is a win, not a failure). You gate what gets in. Adopted
-items land in the phase files **with provenance back to the brief**; tools get verified
-official sources, per-tool confirmed installs, and a `candidate → trialing → adopted`
-ledger in `TOOLBOX.md`. Six months later, "why did we do it this way?" has a paper trail.
+Both agents read the same rules (`CLAUDE.md` / `AGENTS.md`), write the same baton, and
+get their chat transcripts archived locally (`import_chats.py` — searchable, redacted,
+never committed). A stale-baton detector warns when commits pile up after the last
+handoff without a fresh baton pass.
+
+**Sparring** (`/spar`) — for high-stakes builds, make the models argue *before* the
+code exists: Codex attacks the locked plan in bounded **read-only** rounds
+(severity-tagged findings, accept-or-rebut arbitration, honest deadlocks), then one
+model builds and the other grades the diff — *whoever made the thing never grades the
+thing*. The whole argument is resumable state in `_relay/spar/` and gets compiled into
+the wiki afterward. Works in reverse too (Codex drives, headless Claude reviews).
 
 ---
 
 ## 60-second start
 
 ```bash
-git clone https://github.com/gavishap/cortex.git my-project
+git clone https://github.com/gavishap/omnia-vault.git my-project
 cd my-project
 claude        # or: codex
 ```
@@ -196,6 +168,7 @@ claude        # or: codex
 
 ```
 /setup My Product Name
+/roadmap My Product Name
 ```
 
 **Existing project?** Drop your repos / recordings / docs into the folder, then:
@@ -207,11 +180,16 @@ claude        # or: codex
 Then live the loop:
 
 ```
-/catchup   →   work: ask · ingest · build · design   →   /save
+/catchup  →  work: ask · ingest · /intel new videos · build · /spar the risky parts  →  /save
 ```
 
-Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
-[GETTING-STARTED.md](GETTING-STARTED.md)
+> Slash commands are Claude Code's interface. In **Codex**, just say it in words —
+> *"catch up"*, *"triage this video against the plan"*, *"save"* — `AGENTS.md` wires the
+> same workflows and scripts for any agent that reads it.
+
+Missing tooling? `python scripts/setup_vault.py --check` shows what's optional and
+`--install` installs what it can (pip/npm/winget/brew) — the core needs only Python
+and git. Full walkthrough: [GETTING-STARTED.md](GETTING-STARTED.md)
 
 ---
 
@@ -220,12 +198,12 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 ```
 ├─ Wiki/            compiled knowledge — topics · concepts · entities · projects · logs
 ├─ Raw/Sources/     captured material, verbatim, source-of-truth for every claim
-├─ graphify/        committed code-graph snapshots per tracked repo
 ├─ Plan/            the war-room (via /roadmap): phased roadmap · intel briefs · toolbox
+├─ graphify/        committed code-graph snapshots per tracked repo
 ├─ _relay/          the baton (STATE.md) + handoff history + sparring loop state
 ├─ Schema/          frontmatter contracts · naming · lint rules · command reference
 ├─ _templates/      six note templates (source/topic/concept/entity/project/log)
-├─ scripts/         deterministic tooling — python stdlib only, no dependencies
+├─ scripts/         stdlib-only python tooling — zero dependencies to install
 ├─ .claude/
 │  ├─ skills/       21 skills, ready on clone (see below)
 │  └─ commands/     15 slash commands (/setup /import /catchup /save /spar /intel ...)
@@ -238,32 +216,32 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 | Ready on clone (vendored) | What it does |
 |---|---|
 | `graphify` | any folder / repo / paper / video → queryable knowledge graph (`query` · `explain` · `path` · `affected`) |
+| `war-room` | the living plan (`Plan/`): phased roadmap + plan-aware video triage + tool adoption ledger |
 | `video-ingest` | recordings & video URLs → transcript ⇄ frames, correlated, compiled |
 | `import-project` | adopt an existing codebase + raw files into the vault |
 | `relay` | the Claude ⇄ Codex baton pass (async) |
 | `sparring` | the Claude ⇄ Codex argument (sync): adversarial plan review + cross-graded builds |
-| `war-room` | the living plan (`Plan/`): phased roadmap + plan-aware video triage + tool adoption ledger |
-| `github-pr-api` | GitHub PRs from machines with no `gh` CLI (credential-store token + REST) |
 | `project-context-query` | the 3-layer answer engine |
-| `llm-wiki-ingest / query / lint / maintain` | the LLM Wiki core loops |
+| `llm-wiki-ingest / llm-wiki-query / llm-wiki-lint / llm-wiki-maintain` | the LLM Wiki core loops |
 | `taste` | anti-slop frontend design ([Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), MIT) |
 | `ui-ux-pro-max` | searchable design intelligence: 79 styles · 192 palettes · 74 font pairs · 119 UX rules ([nextlevelbuilder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), MIT) |
-| `obsidian-markdown / bases / canvas / cli / defuddle` | first-class Obsidian editing ([kepano/obsidian-skills](https://github.com/kepano/obsidian-skills), MIT) |
+| `obsidian-markdown / obsidian-bases / json-canvas / obsidian-cli / defuddle` | first-class Obsidian editing ([kepano/obsidian-skills](https://github.com/kepano/obsidian-skills), MIT) |
 | `humanizer` + `stakeholder-update-writing` | outward-facing prose that doesn't read like a bot |
+| `github-pr-api` | GitHub PRs from machines with no `gh` CLI (credential-store token + REST) |
 
-| One command away | How |
+| Guided install (a command that walks you through the plugin setup) | How |
 |---|---|
-| **impeccable** — 23 design commands (`polish`, `animate`, `critique`, …) | `/design-setup` |
-| **Anthropic document skills** — Word · PDF · PowerPoint · Excel deliverables | `/docs-setup` |
+| **impeccable** — 23 design commands (`polish`, `animate`, `critique`, …) | `/design-setup` → two `/plugin` commands |
+| **Anthropic document skills** — Word · PDF · PowerPoint · Excel deliverables | `/docs-setup` → two `/plugin` commands |
 
 ### The commands
 
 | Command | Does |
 |---|---|
 | `/setup` · `/import` | initialize a new project · adopt an existing one |
+| `/roadmap` · `/intel` | build the living plan · triage a video/meeting against it |
 | `/catchup` · `/save` · `/handoff` | the daily loop + the agent switch |
 | `/spar` | cross-model adversarial review before high-stakes builds |
-| `/roadmap` · `/intel` | the living plan · triage a video/meeting against it |
 | `/ingest` · `/video` | any source → knowledge · any recording/URL → knowledge |
 | `/wiki` · `/graph` · `/gate` | layered answers · code graphs · the quality gate |
 | `/design-setup` · `/docs-setup` | design stack · document stack |
@@ -272,8 +250,11 @@ Full walkthrough (+ optional tooling like `graphify`, `crv`, `ffmpeg`):
 
 ## FAQ
 
-**Do I need both agents?** No — everything works with just Claude Code *or* just Codex.
-The relay simply means you never lose state if you add the second one.
+**Do I need both agents?** No — all core vault workflows (wiki, graphs, plan, relay,
+video ingest) work with just Claude Code *or* just Codex via `AGENTS.md`. The relay
+simply means you never lose state if you add the second one; sparring needs both
+because arguing with yourself is cheating; and the `/design-setup` / `/docs-setup`
+plugin extras are Claude Code-specific.
 
 **Do I need Obsidian?** No, but you want it: the vault is plain Markdown that happens to
 render as a beautiful navigable graph.
@@ -284,9 +265,14 @@ standard-library only. `graphify` (code graphs), `crv` + `ffmpeg` (video), Node
 `python scripts/setup_vault.py --check` shows what's missing and
 `python scripts/setup_vault.py --install` installs what it can for you.
 
+**Can it really install tools it finds in videos?** Yes, with guardrails: the official
+source gets verified first (video links are untrusted input), you confirm each tool
+individually, and every install is recorded in `Plan/TOOLBOX.md` with provenance.
+
 **Is my data safe in here?** The vault ships empty (one self-documenting demo you can
-prune with one command). The audit gate blocks secrets and machine-local paths from ever
-being committed, repos you import stay gitignored, and chat archives never leave your
+prune with `python scripts/setup_vault.py --prune-demo`). The audit gate — a best-effort
+scan wired into the pre-commit hook — catches secrets and machine-local paths before
+they land, repos you import stay gitignored, and chat archives never leave your
 machine.
 
 **Where did this design come from?** It's the extraction of a production consulting
@@ -300,12 +286,13 @@ diagrams, evolving requirements), then scrubbed to a clean template.
 Built on the shoulders of [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills),
 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill),
 [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill),
-[graphifyy](https://pypi.org/project/graphifyy/) and
-[claude-real-video](https://pypi.org/project/claude-real-video/) —
+[graphifyy](https://pypi.org/project/graphifyy/),
+[claude-real-video](https://pypi.org/project/claude-real-video/) and the
+cross-model mechanics of [claudex-loop](https://github.com/chaseai-yt/claudex-loop) —
 see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 **MIT licensed. Clone it, gut it, ship with it.**
 
-⭐ if your projects deserve a brain.
+⭐ *Omnia* — because your project deserves all of it.
 
 </div>

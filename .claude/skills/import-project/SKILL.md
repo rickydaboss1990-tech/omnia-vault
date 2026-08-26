@@ -1,6 +1,6 @@
 ---
 name: import-project
-description: Adopt an EXISTING project — codebases, recordings, documents, loose notes — into this Cortex vault. Use when the user says "import my project", "bring in this repo", "build the vault from what we already have", or drops folders/files into the vault root and wants them wired into the knowledge system.
+description: Adopt an EXISTING project — codebases, recordings, documents, loose notes — into this Omnia Vault. Use when the user says "import my project", "bring in this repo", "build the vault from what we already have", or drops folders/files into the vault root and wants them wired into the knowledge system.
 ---
 
 # Import Project — build the vault around what already exists

@@ -1,6 +1,6 @@
-# AGENTS.md — Cortex Vault Rules
+# AGENTS.md — Omnia Vault Rules
 
-This folder is a **Cortex vault**: an Obsidian **LLM Wiki** (captured sources
+This folder is an **Omnia Vault**: an Obsidian **LLM Wiki** (captured sources
 compiled into short, linked, source-traceable notes) + **Graphify code graphs**
 of any tracked repos + a **relay** that lets different coding agents (Codex,
 Claude Code, …) work the same project with zero copy-paste. The vault is the

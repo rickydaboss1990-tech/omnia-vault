@@ -1,4 +1,4 @@
-# Getting Started with Cortex
+# Getting Started with Omnia Vault
 
 Five minutes from clone to a working project brain. Two paths — pick yours.
 
@@ -32,7 +32,7 @@ commands for anything it can't do, like `codex login`.)
 ## 1. Clone it
 
 ```bash
-git clone https://github.com/gavishap/cortex.git my-project
+git clone https://github.com/gavishap/omnia-vault.git my-project
 cd my-project
 ```
 
@@ -119,7 +119,7 @@ and cheap.
 
 ## 6. Learn the system
 
-- The demo content (`Wiki/Topics/cortex.md` and friends) is a worked example
+- The demo content (`Wiki/Topics/omnia-vault.md` and friends) is a worked example
   of the whole loop — prune it once you have real content:
   `python scripts/setup_vault.py --prune-demo`
 - [VAULT-GUIDE.md](VAULT-GUIDE.md) — the full operating guide

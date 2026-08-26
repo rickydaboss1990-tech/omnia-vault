@@ -1,4 +1,4 @@
-# VAULT-GUIDE.md — Cortex Operating Guide
+# VAULT-GUIDE.md — Omnia Vault Operating Guide
 
 > **Purpose:** hand this single file to a new AI agent (or human) so it can
 > understand what this vault is, how it's organized, and exactly how to work
@@ -14,7 +14,7 @@
 
 ## 1. TL;DR for a new agent
 
-1. This is a **Cortex vault**: an Obsidian **LLM Wiki** that separates captured
+1. This is an **Omnia Vault**: an Obsidian **LLM Wiki** that separates captured
    source material (`Raw/Sources/`) from compiled, reusable knowledge
    (`Wiki/`), plus **Graphify code graphs** of any tracked repos
    (`graphify/`), plus a **relay baton** (`_relay/STATE.md`) that lets Claude
@@ -35,7 +35,7 @@
 
 An **LLM Wiki** is a knowledge system built so agents (and people) answer
 questions from short, linked, pre-vetted notes instead of re-reading raw
-material every time. Cortex adds two things around it:
+material every time. Omnia Vault adds two things around it:
 
 - a **code layer** — Graphify knowledge graphs, so questions about tracked
   codebases are answered by graph traversal, not repo sweeps;
@@ -79,7 +79,7 @@ Three memories, one system:
 ├─ .claude/
 │  ├─ skills/                # the skill library (works for ANY agent — they're markdown)
 │  └─ commands/              # Claude Code slash commands (/setup, /save, ...)
-├─ .githooks/pre-commit      # build + lint + source-lint (activate via install_hooks.sh)
+├─ .githooks/pre-commit      # the full gate: doctor + build + lint + source-lint + audit (activate via install_hooks.sh)
 ├─ assets/                   # committed images (screenshots, diagrams)
 ├─ chats/                    # BOTH agents' transcript archive (gitignored local memory)
 └─ <your repos>/             # tracked code repos (gitignored; only their graphs are committed)
@@ -273,7 +273,7 @@ stamp the baton, commit.
 Paste this to bootstrap an agent that knows nothing:
 
 ```text
-I'm continuing work in this Cortex vault (the folder containing this file).
+I'm continuing work in this Omnia Vault (the folder containing this file).
 The vault IS your memory — everything you need is inside it. In order:
 
 1. ORIENT — read CLAUDE.md (or AGENTS.md if you're not Claude), then skim

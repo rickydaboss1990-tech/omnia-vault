@@ -8,7 +8,7 @@
 
 ## Topics (1)
 
-- [Cortex](Topics/cortex.md)
+- [Omnia Vault](Topics/omnia-vault.md)
 
 ## Concepts (3)
 
@@ -26,5 +26,5 @@ _No notes yet._
 
 ## Logs (1)
 
-- [Log: 2026-08-26 Built-in demo ingest](Logs/cortex-demo-ingest.md)
+- [Log: 2026-08-26 Built-in demo ingest](Logs/omnia-vault-demo-ingest.md)
 

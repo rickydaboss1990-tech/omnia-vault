@@ -2,4 +2,4 @@
 
 # Logs Index
 
-- [Log: 2026-08-26 Built-in demo ingest](cortex-demo-ingest.md) — updated 2026-08-26
+- [Log: 2026-08-26 Built-in demo ingest](omnia-vault-demo-ingest.md) — updated 2026-08-26

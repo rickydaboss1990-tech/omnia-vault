@@ -2,12 +2,12 @@
 tags:
   - "log"
 topics:
-  - "cortex"
+  - "omnia-vault"
 status: evergreen
 created: 2026-08-26
 updated: 2026-08-26
 sources:
-  - "Raw/Sources/cortex-system-demo.md"
+  - "Raw/Sources/omnia-vault-system-demo.md"
 source_count: 1
 aliases: []
 ---
@@ -17,7 +17,7 @@ aliases: []
 ## What Changed
 
 Seeded the vault's built-in demo: one Raw source
-([[cortex-system-demo]]) compiled into the [[cortex]] topic hub and three
+([[omnia-vault-system-demo]]) compiled into the [[omnia-vault]] topic hub and three
 concepts — [[raw-vs-compiled-knowledge]], [[three-layer-query-rule]],
 [[the-relay]].
 

@@ -1,5 +1,5 @@
 ---
-description: Adopt an EXISTING project (repos, docs, recordings) into this Cortex vault
+description: Adopt an EXISTING project (repos, docs, recordings) into this Omnia Vault
 argument-hint: [optional: paths or notes about what to import]
 ---
 

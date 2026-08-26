@@ -13,7 +13,7 @@ argued, incorporated or passed on, with provenance either way.
 
 Division of labor: `scripts/plan_tool.py` owns the mechanics (scaffold,
 digest, briefs, status); this skill owns the judgment. How it relates to the
-rest of Cortex:
+rest of Omnia Vault:
 
 | System | Question it answers |
 |---|---|
@@ -130,7 +130,7 @@ When the chosen items include tools:
    source, what it's for — the earlier "incorporate" yes is not an install
    yes). Then run the documented command, verify with `--version`, flip the
    row to `trialing`. (`scripts/setup_vault.py --install` stays the installer
-   for Cortex's own stack; project tools install from their TOOLBOX rows.)
+   for Omnia Vault's own stack; project tools install from their TOOLBOX rows.)
 4. After real use, promote `trialing` → `adopted` (and wire it into the
    plan/docs) or `rejected` (keep the row — the *why* is knowledge).
    `plan_tool.py status` nags about stale trials.

@@ -22,7 +22,7 @@ security hole, or user trust? No → skip sparring, just build.
 
 ## Phase S0 — SCOUT (driver alone, minutes not hours)
 
-Recon before asking the user anything — and in a Cortex vault, recon is
+Recon before asking the user anything — and in an Omnia Vault, recon is
 cheap because the knowledge is already compiled. Use the layered memory, not
 sweeps:
 
@@ -244,7 +244,7 @@ Same state tool, same log, same rules — `--driver codex --reviewer claude` on
 _The headless-Codex mechanics above were hardened by the claudex-loop project
 (chaseai-yt/claudex-loop, MIT) — see THIRD-PARTY-NOTICES.md. The vault-scout,
 spar-state relay integration, severity-tagged arbitration, workspace-write
-builds, and the SHIP/knowledge-compile phase are Cortex's own._
+builds, and the SHIP/knowledge-compile phase are Omnia Vault's own._
 
 ## Hard rules
 

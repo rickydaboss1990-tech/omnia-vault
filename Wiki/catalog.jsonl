@@ -1,5 +1,5 @@
-{"path":"Wiki/Concepts/raw-vs-compiled-knowledge.md","title":"Raw vs Compiled Knowledge","tag":"concept","topics":["cortex"],"sources":["Raw/Sources/cortex-system-demo.md"],"updated":"2026-08-26"}
-{"path":"Wiki/Concepts/the-relay.md","title":"The Relay","tag":"concept","topics":["cortex"],"sources":["Raw/Sources/cortex-system-demo.md"],"updated":"2026-08-26"}
-{"path":"Wiki/Concepts/three-layer-query-rule.md","title":"Three-Layer Query Rule","tag":"concept","topics":["cortex"],"sources":["Raw/Sources/cortex-system-demo.md"],"updated":"2026-08-26"}
-{"path":"Wiki/Logs/cortex-demo-ingest.md","title":"Log: 2026-08-26 Built-in demo ingest","tag":"log","topics":["cortex"],"sources":["Raw/Sources/cortex-system-demo.md"],"updated":"2026-08-26"}
-{"path":"Wiki/Topics/cortex.md","title":"Cortex","tag":"topic","topics":[],"sources":["Raw/Sources/cortex-system-demo.md"],"updated":"2026-08-26"}
+{"path":"Wiki/Concepts/raw-vs-compiled-knowledge.md","title":"Raw vs Compiled Knowledge","tag":"concept","topics":["omnia-vault"],"sources":["Raw/Sources/omnia-vault-system-demo.md"],"updated":"2026-08-26"}
+{"path":"Wiki/Concepts/the-relay.md","title":"The Relay","tag":"concept","topics":["omnia-vault"],"sources":["Raw/Sources/omnia-vault-system-demo.md"],"updated":"2026-08-26"}
+{"path":"Wiki/Concepts/three-layer-query-rule.md","title":"Three-Layer Query Rule","tag":"concept","topics":["omnia-vault"],"sources":["Raw/Sources/omnia-vault-system-demo.md"],"updated":"2026-08-26"}
+{"path":"Wiki/Logs/omnia-vault-demo-ingest.md","title":"Log: 2026-08-26 Built-in demo ingest","tag":"log","topics":["omnia-vault"],"sources":["Raw/Sources/omnia-vault-system-demo.md"],"updated":"2026-08-26"}
+{"path":"Wiki/Topics/omnia-vault.md","title":"Omnia Vault","tag":"topic","topics":[],"sources":["Raw/Sources/omnia-vault-system-demo.md"],"updated":"2026-08-26"}

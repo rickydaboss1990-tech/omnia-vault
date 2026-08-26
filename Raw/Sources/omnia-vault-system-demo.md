@@ -1,6 +1,6 @@
 ---
-Title: "Cortex system overview (demo source)"
-Author: "Cortex"
+Title: "Omnia Vault system overview (demo source)"
+Author: "Omnia Vault"
 Reference: "VAULT-GUIDE.md"
 ContentType:
   - "markdown"
@@ -10,13 +10,13 @@ tags:
   - "source"
 ---
 
-# Cortex system overview (demo source)
+# Omnia Vault system overview (demo source)
 
 <!-- This is the vault's built-in DEMO source: it exists so a fresh clone shows
      the full Raw -> Wiki loop working end to end. Prune it once you have real
      content: `python scripts/setup_vault.py --prune-demo`. -->
 
-Cortex is a project brain: an Obsidian LLM Wiki, code knowledge graphs, and a
+Omnia Vault is a project brain: an Obsidian LLM Wiki, code knowledge graphs, and a
 two-agent relay in one repository.
 
 The wiki half separates two layers. The Raw layer captures source material

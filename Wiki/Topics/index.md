@@ -2,4 +2,4 @@
 
 # Topics Index
 
-- [Cortex](cortex.md) — updated 2026-08-26
+- [Omnia Vault](omnia-vault.md) — updated 2026-08-26

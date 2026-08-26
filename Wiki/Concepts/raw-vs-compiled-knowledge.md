@@ -2,12 +2,12 @@
 tags:
   - "concept"
 topics:
-  - "cortex"
+  - "omnia-vault"
 status: evergreen
 created: 2026-08-26
 updated: 2026-08-26
 sources:
-  - "Raw/Sources/cortex-system-demo.md"
+  - "Raw/Sources/omnia-vault-system-demo.md"
 source_count: 1
 aliases: []
 ---
@@ -38,5 +38,5 @@ traceable notes — and any claim can be walked back to its source on demand.
 
 ## Related
 
-- [[cortex]]
+- [[omnia-vault]]
 - [[three-layer-query-rule]]

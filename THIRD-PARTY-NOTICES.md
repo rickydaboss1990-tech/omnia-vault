@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-Cortex bundles ("vendors") several excellent open-source skills so a fresh
+Omnia Vault bundles ("vendors") several excellent open-source skills so a fresh
 clone works with zero installs. Each stays under its own license, preserved in
 its folder. Thank you to every author.
 
@@ -34,7 +34,7 @@ its folder. Thank you to every author.
   by [Matt Pocock](https://github.com/mattpocock/skills) and the
   Codex-as-builder pattern from
   [steipete/agent-scripts](https://github.com/steipete/agent-scripts) —
-  inspired sparring's review/build discipline. Cortex's implementation
+  inspired sparring's review/build discipline. Omnia Vault's implementation
   (vault-layered recon, relay-resident resumable state via `spar_tool.py`,
   severity-tagged arbitration, `workspace-write` builds, the knowledge-compile
   phase, and the reversed Codex-drives-Claude mode) is its own.

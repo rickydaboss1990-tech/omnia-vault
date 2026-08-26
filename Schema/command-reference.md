@@ -98,7 +98,7 @@ Set `$env:PYTHONUTF8=1` first on Windows PowerShell.
 
 | Command | Purpose |
 |---------|---------|
-| `sh scripts/install_hooks.sh` | Sets `core.hooksPath` to `.githooks/` so the pre-commit gate (build + lint + source-lint) runs on every commit. Optional but recommended. |
+| `sh scripts/install_hooks.sh` | Sets `core.hooksPath` to `.githooks/` so the full pre-commit gate (doctor + build + lint + source-lint + audit_public) runs on every commit. Optional but recommended. |
 
 ## Maintenance Gate
 

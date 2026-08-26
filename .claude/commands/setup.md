@@ -1,9 +1,9 @@
 ---
-description: Initialize this Cortex vault for a NEW project (seed notes, relay baton, first commit)
+description: Initialize this Omnia Vault for a NEW project (seed notes, relay baton, first commit)
 argument-hint: [project name]
 ---
 
-Initialize this Cortex vault for a new project.
+Initialize this Omnia Vault for a new project.
 
 1. If `$ARGUMENTS` is empty, ask the user for: the project name, the main
    topic/domain (may default to the name), and whether code repos will live in

@@ -73,9 +73,13 @@ def cmd_status(_):
         print(f"relay: git HEAD    {head} on {branch}")
         if stamp and stamp.get("sha") and stamp["sha"] not in ("", "no-git", head):
             behind = git("rev-list", "--count", f"{stamp['sha']}..HEAD")
-            if behind and behind != "0":
-                print(f"relay: WARNING     {behind} commit(s) landed AFTER the last handoff "
-                      "stamp — the baton may be stale. Read `git log` before trusting it.")
+            # The stamp is written BEFORE the handoff commit, so exactly one
+            # commit after the stamped sha is a normal, fresh handoff. Two or
+            # more means work landed without a new handoff.
+            if behind and behind.isdigit() and int(behind) > 1:
+                print(f"relay: WARNING     {behind} commits landed after the last handoff "
+                      "stamp (1 is normal — the handoff commit itself) — the baton may "
+                      "be stale. Read `git log` before trusting it.")
     # Show the "Now" section so `status` is a one-stop orientation.
     m = re.search(r"^## Now\s*\n(.*?)(?=^## |\Z)", text, re.M | re.S)
     if m and m.group(1).strip():

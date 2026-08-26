@@ -9,7 +9,7 @@
 
 ## Now
 
-- Fresh Cortex vault — no project initialized yet.
+- Fresh Omnia Vault — no project initialized yet.
 - Next: run the setup (`/setup` in Claude Code, or
   `python scripts/setup_vault.py --name "Your Project"`), or adopt an existing
   project (`/import` · `python scripts/setup_vault.py --inventory`).
