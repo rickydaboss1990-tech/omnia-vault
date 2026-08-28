@@ -154,6 +154,15 @@ model builds and the other grades the diff — *whoever made the thing never gra
 thing*. The whole argument is resumable state in `_relay/spar/` and gets compiled into
 the wiki afterward. Works in reverse too (Codex drives, headless Claude reviews).
 
+**The council** (`/council`) — for expensive-if-wrong *decisions* (pricing, pivots,
+architecture direction), convene five blind seats **split across both models**: a
+Codex Skeptic, a Claude Rebuilder, a Claude Maximalist, a Codex Operator — and an
+Outsider seat that runs from an **empty directory**, so it judges your idea knowing
+literally nothing about you (the curse of knowledge, cured by a sandbox). Opinions are
+anonymized, each bench blind-reviews the mixed set, and the chair rules — dissent
+preserved in writing, record kept in `_relay/council/`. Sparring is depth on one plan;
+the council is breadth before you lock one.
+
 ---
 
 ## 60-second start
@@ -205,8 +214,8 @@ and git. Full walkthrough: [GETTING-STARTED.md](GETTING-STARTED.md)
 ├─ _templates/      six note templates (source/topic/concept/entity/project/log)
 ├─ scripts/         stdlib-only python tooling — zero dependencies to install
 ├─ .claude/
-│  ├─ skills/       21 skills, ready on clone (see below)
-│  └─ commands/     15 slash commands (/setup /import /catchup /save /spar /intel ...)
+│  ├─ skills/       22 skills, ready on clone (see below)
+│  └─ commands/     16 slash commands (/setup /import /catchup /save /spar /intel ...)
 ├─ CLAUDE.md        Claude Code wiring        AGENTS.md   Codex + any-agent rules
 └─ VAULT-GUIDE.md   the full operating guide
 ```
@@ -221,6 +230,7 @@ and git. Full walkthrough: [GETTING-STARTED.md](GETTING-STARTED.md)
 | `import-project` | adopt an existing codebase + raw files into the vault |
 | `relay` | the Claude ⇄ Codex baton pass (async) |
 | `sparring` | the Claude ⇄ Codex argument (sync): adversarial plan review + cross-graded builds |
+| `council` | five-seat decision panel split across both models, blind opinions + cross-bench review |
 | `project-context-query` | the 3-layer answer engine |
 | `llm-wiki-ingest / llm-wiki-query / llm-wiki-lint / llm-wiki-maintain` | the LLM Wiki core loops |
 | `taste` | anti-slop frontend design ([Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill), MIT) |
@@ -241,7 +251,7 @@ and git. Full walkthrough: [GETTING-STARTED.md](GETTING-STARTED.md)
 | `/setup` · `/import` | initialize a new project · adopt an existing one |
 | `/roadmap` · `/intel` | build the living plan · triage a video/meeting against it |
 | `/catchup` · `/save` · `/handoff` | the daily loop + the agent switch |
-| `/spar` | cross-model adversarial review before high-stakes builds |
+| `/spar` · `/council` | cross-model adversarial review · five-seat cross-model decision panel |
 | `/ingest` · `/video` | any source → knowledge · any recording/URL → knowledge |
 | `/wiki` · `/graph` · `/gate` | layered answers · code graphs · the quality gate |
 | `/design-setup` · `/docs-setup` | design stack · document stack |

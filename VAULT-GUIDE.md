@@ -72,7 +72,7 @@ Three memories, one system:
 │  └─ log.md                 # generated change log (via `wiki_tool.py log`)
 ├─ graphify/                 # committed Graphify snapshots per tracked repo
 ├─ Plan/                     # the war-room (created by /roadmap): ROADMAP.md, phases/, intel/, TOOLBOX.md
-├─ _relay/                   # the agent-to-agent baton: STATE.md, HISTORY.md, PROTOCOL.md (+ spar/ loop state)
+├─ _relay/                   # the agent-to-agent baton: STATE.md, HISTORY.md, PROTOCOL.md (+ spar/ loop state, council/ records)
 ├─ Schema/                   # contracts: frontmatter, naming, lint, commands, examples
 ├─ _templates/               # source/concept/topic/entity/project/log templates
 ├─ scripts/                  # deterministic tooling (python stdlib only) — see §6
@@ -173,7 +173,8 @@ All stdlib-only, all run from the vault root. Full table:
 agent): `llm-wiki-ingest`, `llm-wiki-query`, `llm-wiki-lint`,
 `llm-wiki-maintain`, `project-context-query`, `video-ingest`,
 `import-project`, `relay` (async handoff), `sparring` (sync cross-model
-review — needs the Codex CLI), `war-room` (the living plan + plan-aware
+review — needs the Codex CLI), `council` (five-seat cross-model decision
+panel — needs the Codex CLI), `war-room` (the living plan + plan-aware
 intel triage), `github-pr-api`, `stakeholder-update-writing`.
 
 **Obsidian editing skills** (from

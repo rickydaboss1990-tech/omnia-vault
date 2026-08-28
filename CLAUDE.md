@@ -38,6 +38,13 @@ against the phases, and let the user gate what gets incorporated or
 installed. Never answer from the video alone. (Also: `/intel`; plan building
 and upkeep: `/roadmap`.)
 
+**council** — when the user says "council this", "get multiple perspectives",
+or faces a genuinely uncertain, expensive-if-wrong decision: run the
+`council` skill — five blind seats split across Codex and Claude (the
+Outsider seat runs context-free from an empty directory), anonymized
+cross-bench review, one ruled verdict, record kept in `_relay/council/`.
+Breadth before locking a direction; `spar` is depth after. (Also: `/council`.)
+
 ## 3-Layer Query Rule (any question about the project or its code)
 
 1. **Graph first:** `graphify query "<question>" --graph graphify/<repo>/graph.json`
@@ -64,6 +71,7 @@ Full traversal recipe: `.claude/skills/project-context-query/SKILL.md`.
 | Commit hygiene + routine upkeep | `llm-wiki-maintain` |
 | Agent handoff (⇄ Codex, async) | `relay` |
 | Cross-model plan/diff review (⇄ Codex, sync) | `sparring` |
+| Cross-model decision panel (5 seats, both agents) | `council` (`/council`) |
 | Code knowledge graphs | `graphify` |
 | GitHub PRs without gh CLI | `github-pr-api` |
 | Obsidian file editing | `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli` |
@@ -71,8 +79,8 @@ Full traversal recipe: `.claude/skills/project-context-query/SKILL.md`.
 | Frontend design work | `taste`, `ui-ux-pro-max` (see `/design-setup`) |
 
 Slash commands: `/setup`, `/import`, `/catchup`, `/save`, `/handoff`,
-`/spar`, `/roadmap`, `/intel`, `/ingest`, `/video`, `/graph`, `/wiki`,
-`/gate`, `/design-setup`, `/docs-setup`.
+`/spar`, `/council`, `/roadmap`, `/intel`, `/ingest`, `/video`, `/graph`,
+`/wiki`, `/gate`, `/design-setup`, `/docs-setup`.
 
 ## Memory automation
 

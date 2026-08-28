@@ -26,6 +26,17 @@ its folder. Thank you to every author.
 
 ## Inspiration & adapted patterns (no files copied)
 
+- The `council` skill implements the multi-advisor deliberation methodology
+  of [Andrej Karpathy's LLM Council](https://github.com/karpathy/llm-council)
+  as popularized for Claude skills by
+  [Ole Lehmann's llm-council](https://github.com/aiwithremy/claude-skills-llm-council)
+  (independent opinions → anonymized peer review → chairman synthesis). That
+  repo carries no license, so nothing from it is reproduced here — Omnia
+  Vault's implementation is written from scratch and differs structurally:
+  every seat is a real separate agent split across TWO models (Codex +
+  Claude) instead of one model role-playing personas, the Outsider seat is
+  mechanically context-free (an empty-directory sandbox), review runs
+  cross-bench, and sessions are recorded in `_relay/council/`.
 - The `sparring` skill's headless-Codex invocation mechanics (stdin feeding,
   `exec resume` sandbox forcing, thread-id capture, timeout guards) were
   verified and documented by

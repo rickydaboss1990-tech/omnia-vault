@@ -57,6 +57,15 @@ macOS/Linux. Every script is deterministic and standard-library only.
 Reviewer invocation mechanics (stdin feeding, resume sandbox forcing, thread
 ids, timeouts) live in `.claude/skills/sparring/SKILL.md`.
 
+## The council (cross-model decision panel)
+
+No dedicated script — the `council` skill orchestrates single-shot,
+parallel, blind seat calls (fresh Codex threads + Claude subagents; the
+Outsider seat runs Codex from an empty directory so it has zero project
+context), then an anonymized cross-bench review and a ruled verdict. Records
+land in `_relay/council/<date>-<slug>.md` (committed). Convene with
+`/council <decision>`; details in `.claude/skills/council/SKILL.md`.
+
 ## plan_tool.py (war-room — the living plan)
 
 | Command | Purpose |

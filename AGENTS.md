@@ -99,6 +99,11 @@ Every agent working in this folder follows these rules. The narrative guide is
   start with `--driver codex --reviewer claude` and use headless Claude
   (`claude -p ... --permission-mode plan --output-format json`) as the
   read-only critic; same `scripts/spar_tool.py` state, same rules.
+- Cross-model decision panel (breadth, before locking a direction):
+  `.claude/skills/council/SKILL.md` — five blind seats split across both
+  models, anonymized cross-bench review, ruled verdict recorded in
+  `_relay/council/`. The driving agent chairs; seats on the other model run
+  headlessly (fresh thread/session per seat, never reused).
 - GitHub PRs without gh CLI: `.claude/skills/github-pr-api/SKILL.md`
 - Obsidian editing: `.claude/skills/obsidian-markdown/SKILL.md` (+ bases,
   canvas, cli, defuddle)
